@@ -8,10 +8,11 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-public class UILayer {
+public class UILayer implements Grid {
     private int windowWidth;
     private int windowHeight;
     private int size;
+    private char [][] charGrid;
     public UILayer(){
 
     }
@@ -20,6 +21,7 @@ public class UILayer {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         this.size = size;
+        this.charGrid = new char[windowHeight][windowWidth];
     }
 
     public int getWindowWidth() {
@@ -78,5 +80,21 @@ public class UILayer {
         btn.setTextFill(Paint.valueOf("white"));
         pane.getChildren().add(btn);
         return pane;
+    }
+    @Override
+    public void setCoordinates(int x, int y) {
+        this.charGrid[x][y] = 'S';
+    }
+    @Override
+    public void unsetCoordinates(int x, int y){
+        this.charGrid[x][y] = ' ';
+    }
+    @Override
+    public char[][] getCompleteGrid(){
+        return this.charGrid;
+    }
+    @Override
+    public void setCompleteGrid(char[][] grid){
+        this.charGrid = grid;
     }
 }
