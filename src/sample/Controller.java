@@ -34,25 +34,46 @@ public class Controller {
     }
     public char[][] nextMove(char [][]grid){
         char[][] newGrid = new char[grid.length][grid[0].length];
-        initializeGrid(newGrid);
-        for (int i=0; i<grid.length; i++){
-            for (int f=0; f<grid[i].length; f++){
-               /* if (getNeighbours(grid, f, i) < 2 && grid[i][f] == 'S'){
-                        grid[i][f] = ' ';
+        char[][] gridWithDeadCells = new char[grid.length][grid[0].length];
+        //initializeGrid(newGrid);
+        copyGrids(grid, newGrid);
+        for (int i=0; i<grid.length; i++) {
+            for (int f = 0; f < grid[i].length; f++) {
+                if (getNeighbours(grid, f, i) == 3 && grid[i][f] == ' ') {
+                    newGrid[i][f] = 'S';
                 }
-                else{*/
-                if (getNeighbours(grid, f, i) > 2 && grid[i][f] == ' ' || getNeighbours(grid, f, i) >= 2 && grid[i][f] == 'S'){
-                        newGrid[i][f] = 'S';
-                    }
-                //}
             }
         }
+        killCells(grid, newGrid);
+
         return newGrid;
     }
     public void initializeGrid(char[][] grid){
         for (int i=0; i < grid.length; i++){
             for (int f=0; f < grid[i].length; f++){
                 grid[i][f] = ' ';
+            }
+        }
+    }
+    public char[][] killCells(char[][]grid, char[][] newGrid){
+        for (int i=0; i<grid.length; i++) {
+            for (int f = 0; f < grid[i].length; f++) {
+                if (getNeighbours(grid, f, i) < 2 && grid[i][f] == 'S' || getNeighbours(grid, f, i) > 3) {
+                    newGrid[i][f] = ' ';
+                }
+                /*else{
+                    if (getNeighbours(grid, f, i) > 2 && grid[i][f] == ' ' || getNeighbours(grid, f, i) >= 2 && grid[i][f] == 'S') {
+                        newGrid[i][f] = 'S';
+                    }
+                }*/
+            }
+        }
+        return newGrid;
+    }
+    public void copyGrids(char [][] grid1, char[][]grid2){
+        for (int i=0; i<grid1.length; i++){
+            for (int f=0; f<grid2.length; f++){
+                grid2[i][f] = grid1[i][f];
             }
         }
     }
