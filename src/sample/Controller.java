@@ -7,6 +7,9 @@ public class Controller {
     }
     public static void BtnClick_handleStart(char [][] grid){
             //handle once the start button is clicked it should
+        while (true){
+
+        }
     }
     public static char[][] BtnClick_handleNext(char[][]grid){
         Controller con = new Controller();
@@ -34,7 +37,6 @@ public class Controller {
     }
     public char[][] nextMove(char [][]grid){
         char[][] newGrid = new char[grid.length][grid[0].length];
-        char[][] gridWithDeadCells = new char[grid.length][grid[0].length];
         //initializeGrid(newGrid);
         copyGrids(grid, newGrid);
         for (int i=0; i<grid.length; i++) {
@@ -55,7 +57,7 @@ public class Controller {
             }
         }
     }
-    public char[][] killCells(char[][]grid, char[][] newGrid){
+    public void killCells(char[][]grid, char[][] newGrid){
         for (int i=0; i<grid.length; i++) {
             for (int f = 0; f < grid[i].length; f++) {
                 if (getNeighbours(grid, f, i) < 2 && grid[i][f] == 'S' || getNeighbours(grid, f, i) > 3) {
@@ -68,7 +70,6 @@ public class Controller {
                 }*/
             }
         }
-        return newGrid;
     }
     public void copyGrids(char [][] grid1, char[][]grid2){
         for (int i=0; i<grid1.length; i++){

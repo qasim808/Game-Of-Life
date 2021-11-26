@@ -36,7 +36,6 @@ public class Main extends Application {
             primaryStage.show();
     }
     public static void main(String[] args) {
-        int i=0;
         launch(args);
     }
 }

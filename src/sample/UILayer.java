@@ -118,9 +118,17 @@ public class UILayer implements Grid {
             }
         });
         pane.getChildren().add(btn);
-        btn = new Button("Reset");
+        btn = new Button("Clear");
         btn.setStyle("-fx-background-color: #1b2670;");
         btn.setTextFill(Paint.valueOf("white"));
+        btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                //reset to default empty
+                initiliazeCharGrid();
+                getGridPane();
+            }
+        });
         pane.getChildren().add(btn);
         return pane;
     }
