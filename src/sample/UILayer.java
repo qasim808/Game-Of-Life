@@ -51,8 +51,7 @@ public class UILayer implements Grid {
         //pane.setPrefColumns((this.windowWidth/size));
         //pane.setPrefRows(this.windowHeight/size);
         //pane.setTileAlignment(Pos.CENTER);
-        //pane.setHgap(1);
-       // pane.setVgap(1);
+        gPane.setPrefSize(this.windowWidth/size, this.windowHeight/size);
 
         for (int i=0; i<(this.windowWidth/size); i++) {
             for (int f=0; f<(this.windowHeight/size - 2); f++) {
