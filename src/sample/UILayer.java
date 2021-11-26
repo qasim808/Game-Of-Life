@@ -1,13 +1,11 @@
 package sample;
 
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -18,6 +16,7 @@ public class UILayer implements Grid {
     private int windowHeight;
     private int size;
     private char [][] charGrid;
+    private GridPane gPane;
     public UILayer(){
 
     }
@@ -26,9 +25,18 @@ public class UILayer implements Grid {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         this.size = size;
-        this.charGrid = new char[windowHeight][windowWidth];
+        this.charGrid = new char[windowHeight/size][windowWidth/size];
+        gPane = new GridPane();
+        initiliazeCharGrid();
     }
 
+    public void initiliazeCharGrid(){
+        for (int i=0; i<windowHeight/size; i++){
+            for (int f=0; f<windowWidth/size; f++){
+                charGrid[i][f] = ' ';
+            }
+        }
+    }
     public int getWindowWidth() {
         return windowWidth;
     }
@@ -45,27 +53,37 @@ public class UILayer implements Grid {
         this.windowHeight = windowHeight;
     }
 
-    public GridPane getTilePane(){
-        TilePane pane  = new TilePane();
-        GridPane gPane = new GridPane();
+    public GridPane getGridPane(){
+        //TilePane pane  = new TilePane();
         //pane.setPrefColumns((this.windowWidth/size));
         //pane.setPrefRows(this.windowHeight/size);
-        //pane.setTileAlignment(Pos.CENTER);
+        //pane.setTileAlignment(Pos.CENTER)
+        gPane.getChildren().removeAll(gPane.getChildren());
         gPane.setPrefSize(this.windowWidth/size, this.windowHeight/size);
-
+        gPane.setVgap(1);
+        gPane.setHgap(1);
         for (int i=0; i<(this.windowWidth/size); i++) {
-            for (int f=0; f<(this.windowHeight/size - 2); f++) {
-                final Rectangle rect = new Rectangle(size, size, Paint.valueOf("grey"));
+            for (int f=0; f<(this.windowHeight/size); f++) {
+                final Rectangle rect;
+                if (charGrid[i][f] == 'S') {
+                    rect = new Rectangle(size, size, Paint.valueOf("yellow"));
+                }
+                else{
+                    rect = new Rectangle(size, size, Paint.valueOf("grey"));
+                }
                 EventHandler<MouseEvent> eventHand = new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        rect.setFill(Paint.valueOf("yellow"));
-                        System.out.println("X: " +  Math.floor(rect.getLayoutX()/15.2) + "Y: " + Math.floor(rect.getLayoutY()/15.2));
-
+                        if (rect.getFill() == Paint.valueOf("grey")) {
+                            rect.setFill(Paint.valueOf("yellow"));
+                            setCoordinates(Math.floor(rect.getLayoutX() / 15.2), Math.floor(rect.getLayoutY()/15.2));
+                        }
+                        else{
+                            rect.setFill(Paint.valueOf("grey"));
+                            unsetCoordinates(Math.floor(rect.getLayoutX() / 15.2), Math.floor(rect.getLayoutY()/15.2));
+                        }
                     }
-
                 };
-
                 rect.setOnMouseClicked(eventHand);
                 gPane.add(rect, f, i);
                 //pane.getChildren().add(rect);
@@ -91,6 +109,14 @@ public class UILayer implements Grid {
         btn = new Button("Next");
         btn.setStyle("-fx-background-color: #1b2670;");
         btn.setTextFill(Paint.valueOf("white"));
+        btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("NEXT CLICKED");
+                charGrid = Controller.BtnClick_handleNext(charGrid);
+                getGridPane();
+            }
+        });
         pane.getChildren().add(btn);
         btn = new Button("Reset");
         btn.setStyle("-fx-background-color: #1b2670;");
@@ -99,12 +125,14 @@ public class UILayer implements Grid {
         return pane;
     }
     @Override
-    public void setCoordinates(int x, int y) {
-        this.charGrid[x][y] = 'S';
+    public void setCoordinates(double x, double y) {
+        this.charGrid[(int)y][(int)x] = 'S';
+        System.out.println("X: " + (int)x + " Y: " +(int)y);
     }
     @Override
-    public void unsetCoordinates(int x, int y){
-        this.charGrid[x][y] = ' ';
+    public void unsetCoordinates(double x, double y){
+        this.charGrid[(int)y][(int)x] = ' ';
+        System.out.println("X: " + (int)x + " Y: " +(int)y);
     }
     @Override
     public char[][] getCompleteGrid(){

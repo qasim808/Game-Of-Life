@@ -28,17 +28,15 @@ public class Main extends Application {
         primaryStage.setTitle("Conway Game");
        // StackPane menuPane = new StackPane();
        // SubScene lowerMenu = new SubScene(menuPane, 560, 200);
-        UILayer UIWindow = new UILayer(560, 560, 15);
-        VBox root = new VBox();
-        root.getChildren().addAll(UIWindow.getTilePane(), UIWindow.getMenu());
-        primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root, 560, 700));
-        primaryStage.show();
-
+            UILayer UIWindow = new UILayer(560, 560, 15);
+            VBox root = new VBox();
+            primaryStage.setResizable(false);
+            root.getChildren().addAll(UIWindow.getGridPane(), UIWindow.getMenu());
+            primaryStage.setScene(new Scene(root, 560, 700));
+            primaryStage.show();
     }
-
-
     public static void main(String[] args) {
+        int i=0;
         launch(args);
     }
 }
