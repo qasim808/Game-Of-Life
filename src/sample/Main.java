@@ -1,24 +1,11 @@
 package sample;
 
-import com.sun.javafx.geom.RectangularShape;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
-import javafx.scene.*;
-import javafx.scene.control.Separator;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
-import java.awt.*;
-import java.util.Collection;
-import java.util.Stack;
+import java.util.Scanner;
 
 public class Main extends Application {
 
@@ -36,6 +23,19 @@ public class Main extends Application {
             primaryStage.show();
     }
     public static void main(String[] args) {
-        launch(args);
+        System.out.println("Hello World");
+        Scanner in = new Scanner(System.in);
+
+        int choice;
+        System.out.print("* How would you like to launch the game? (1. Console 2. JavaFX): ");
+        choice = in.nextInt();
+
+        if (choice == 1)
+        {
+            System.out.print("Console!");
+        }
+        else{
+            launch(args);
+        }
     }
 }
