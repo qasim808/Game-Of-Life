@@ -108,4 +108,7 @@ public class UILayer implements Grid {
     public TilePane getMenu(){
         return new TilePane();
     }
+    public void display(){
+
+    }
 }

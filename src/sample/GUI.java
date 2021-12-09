@@ -14,9 +14,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class GUI extends UILayer {
     private boolean isFirstClick;
     private GridPane gPane;
@@ -28,7 +25,8 @@ public class GUI extends UILayer {
         timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent ev) {
-                setCharGrid(Controller.BtnClick_handleNext(getCharGrid()));
+                CParser cp = new CParser();
+                setCharGrid(cp.BtnClick_handleNext(getCharGrid()));
                 getGridPane();
             }
         }));
@@ -118,7 +116,8 @@ public class GUI extends UILayer {
                 System.out.println("NEXT CLICKED");
                 isFirstClick = true;
                 setInitialGrid();
-                setCharGrid(Controller.BtnClick_handleNext(getCharGrid()));
+                CParser cp = new CParser();
+                setCharGrid(cp.BtnClick_handleNext(getCharGrid()));
                 getGridPane(); //this function automatically detects and edits changes!!!!!!
             }
         });
