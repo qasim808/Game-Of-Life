@@ -36,6 +36,7 @@ public class Main extends Application {
             primaryStage.setResizable(false);
             root.getChildren().addAll(UIWindow.getGridPane(), UIWindow.getMenu());*/
             //above code defines the UI scene...
+
             gameWindow gw = new gameWindow();
             primaryStage.setResizable(false);
             ParentWindow newWindow = new ParentWindow(primaryStage, gw.createAndGetGameScene());

@@ -146,6 +146,16 @@ public class GUI extends UILayer {
                 getGridPane();
             }
         });
+        pane.getChildren().add(btn);
+        btn = new Button("Save State");
+        btn.setStyle("-fx-background-color: #1b2670;");
+        btn.setTextFill(Paint.valueOf("white"));
+        btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                //reset to default empty
+            }
+        });
 
 
         pane.getChildren().add(btn);
