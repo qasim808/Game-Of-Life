@@ -1,5 +1,9 @@
 package sample;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -8,14 +12,26 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GUI extends UILayer {
     private boolean isFirstClick;
     private GridPane gPane;
+    private Timeline timeline;
     public GUI(int windowWidth, int windowHeight, int size){
         super(windowWidth, windowHeight,size);
         this.isFirstClick = false;
         gPane = new GridPane();
+        timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent ev) {
+                setCharGrid(Controller.BtnClick_handleNext(getCharGrid()));
+                getGridPane();
+            }
+        }));
     }
     @Override
     public GridPane getGridPane(){
@@ -69,15 +85,25 @@ public class GUI extends UILayer {
         btn.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 System.out.println("Hello World");
-                if (finalBtn.getText() == "Start") {
-                    while(true) {
-                        finalBtn.setText("STOP");
-                        Controller.BtnClick_handleStart(getCharGrid());
-                        getGridPane();
-                    }
+                if (finalBtn.getText().equals("Start")) {
+                    isFirstClick = true;
+                    setInitialGrid();
+                    finalBtn.setText("Stop");
+                    /*TimerTask task = new TimerTask() {
+                        @Override
+                        public void run() {
+                            setCharGrid(Controller.BtnClick_handleStart(getCharGrid()));
+                            getGridPane();
+                        }
+                    };*/
+
+                    timeline.setCycleCount(Animation.INDEFINITE);
+                    timeline.play();
+
                 }
-                else if (finalBtn.getText() == "Stop"){
-                    finalBtn.setText("START");
+                else if (finalBtn.getText().equals("Stop")){
+                    timeline.stop();
+                    finalBtn.setText("Start");
                 }
             }
         }));
@@ -121,6 +147,7 @@ public class GUI extends UILayer {
                 getGridPane();
             }
         });
+
 
         pane.getChildren().add(btn);
         return pane;
