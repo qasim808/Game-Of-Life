@@ -1,28 +1,54 @@
 package sample;
 
-import com.sun.javafx.geom.RectangularShape;
-import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.*;
-import javafx.scene.control.Separator;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 
-import java.awt.*;
-import java.util.Collection;
-import java.util.Stack;
+class gameWindow{
+    public gameWindow(){
 
+    }
+    public Scene createAndGetGameScene(){
+        UILayer UIWindow = new GUI(560, 560, 15); //coordinates for the block window
+        VBox root = new VBox();
+        root.getChildren().addAll(UIWindow.getGridPane(), UIWindow.getMenu());
+        return new Scene(root, 560, 700);
+    }
+}
 public class Main extends Application {
 
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+          primaryStage.setTitle("Conway Game");
+       // StackPane menuPane = new StackPane();
+       // SubScene lowerMenu = new SubScene(menuPane, 560, 200);
+            /*UILayer UIWindow = new GUI(560, 560, 15); //coordinates for the block window
+            VBox root = new VBox();
+            primaryStage.setResizable(false);
+            root.getChildren().addAll(UIWindow.getGridPane(), UIWindow.getMenu());*/
+            //above code defines the UI scene...
+            gameWindow gw = new gameWindow();
+            primaryStage.setResizable(false);
+            ParentWindow newWindow = new ParentWindow(primaryStage, gw.createAndGetGameScene());
+            VBox parentScene = new VBox();
+            parentScene.getChildren().add(newWindow.getParentButtons());
+            primaryStage.setScene(new Scene(parentScene, 560, 700)); //700 to include the buttons
+            primaryStage.show();
+       /*     CUI CUI = new CUI(560, 560, 15);
+            CUI.display();*/
+    }
+    public static void main(String[] args) {
+        launch(args);
+    }
     public TilePane getParentButtons(final Stage primaryStage, final VBox box){
         TilePane tPane = new TilePane();
         Button btn = new Button("Start New Game");
@@ -39,27 +65,6 @@ public class Main extends Application {
         btn = finalBtn;
         tPane.getChildren().add(btn);
         return tPane;
-    }
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-          primaryStage.setTitle("Conway Game");
-       // StackPane menuPane = new StackPane();
-       // SubScene lowerMenu = new SubScene(menuPane, 560, 200);
-            UILayer UIWindow = new GUI(560, 560, 15); //coordinates for the block window
-            VBox root = new VBox();
-            primaryStage.setResizable(false);
-            root.getChildren().addAll(UIWindow.getGridPane(), UIWindow.getMenu());
-            //above code defines the UI scene...
-            VBox parentScene = new VBox();
-            parentScene.getChildren().add(getParentButtons(primaryStage, root));
-            primaryStage.setScene(new Scene(parentScene, 560, 700)); //700 to include the buttons
-            primaryStage.show();
-       /*     CUI CUI = new CUI(560, 560, 15);
-            CUI.display();*/
-    }
-    public static void main(String[] args) {
-        launch(args);
     }
 }
 
