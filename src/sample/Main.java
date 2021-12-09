@@ -21,14 +21,13 @@ import java.util.Collection;
 import java.util.Stack;
 
 public class Main extends Application {
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Conway Game");
        // StackPane menuPane = new StackPane();
        // SubScene lowerMenu = new SubScene(menuPane, 560, 200);
-            UILayer UIWindow = new UILayer(560, 560, 15);
+           UILayer UIWindow = new GUI(560, 560, 15);
             VBox root = new VBox();
             primaryStage.setResizable(false);
             root.getChildren().addAll(UIWindow.getGridPane(), UIWindow.getMenu());

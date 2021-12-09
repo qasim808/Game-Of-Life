@@ -5,11 +5,10 @@ public class Controller {
     public Controller(){
 
     }
-    public static void BtnClick_handleStart(char [][] grid){
+    public static char [][] BtnClick_handleStart(char [][] grid){
             //handle once the start button is clicked it should
-        while (true){
-
-        }
+        Controller con = new Controller();
+        return con.nextMove(grid);
     }
     public static char[][] BtnClick_handleNext(char[][]grid){
         Controller con = new Controller();
