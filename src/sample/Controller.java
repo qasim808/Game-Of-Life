@@ -1,21 +1,22 @@
 package sample;
 
 
-public class Controller {
+public class Controller implements IController {
     public Controller(){
 
     }
-    public static void BtnClick_handleStart(char [][] grid){
+    @Override
+    public char [][] BtnClick_handleStart(char [][] grid){
             //handle once the start button is clicked it should
-        while (true){
-
-        }
-    }
-    public static char[][] BtnClick_handleNext(char[][]grid){
         Controller con = new Controller();
         return con.nextMove(grid);
     }
-    public int getNeighbours(char[][]grid, int x, int y){
+    @Override
+    public char[][] BtnClick_handleNext(char[][]grid){
+        Controller con = new Controller();
+        return con.nextMove(grid);
+    }
+    private int getNeighbours(char[][]grid, int x, int y){
         int count = 0;
         if (y+1 < grid.length && x+1 < grid[y+1].length && grid[y+1][x+1] == 'S')
             count++;
@@ -35,7 +36,7 @@ public class Controller {
             count++;
         return count;
     }
-    public char[][] nextMove(char [][]grid){
+    private char[][] nextMove(char [][]grid){
         char[][] newGrid = new char[grid.length][grid[0].length];
         //initializeGrid(newGrid);
         copyGrids(grid, newGrid);
@@ -57,7 +58,7 @@ public class Controller {
             }
         }
     }
-    public void killCells(char[][]grid, char[][] newGrid){
+    private void killCells(char[][]grid, char[][] newGrid){
         for (int i=0; i<grid.length; i++) {
             for (int f = 0; f < grid[i].length; f++) {
                 if (getNeighbours(grid, f, i) < 2 && grid[i][f] == 'S' || getNeighbours(grid, f, i) > 3) {
@@ -71,7 +72,7 @@ public class Controller {
             }
         }
     }
-    public void copyGrids(char [][] grid1, char[][]grid2){
+    private void copyGrids(char [][] grid1, char[][]grid2){
         for (int i=0; i<grid1.length; i++){
             for (int f=0; f<grid2.length; f++){
                 grid2[i][f] = grid1[i][f];
