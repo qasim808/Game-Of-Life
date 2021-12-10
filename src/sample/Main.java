@@ -141,7 +141,10 @@ public class Main extends Application {
         }
 
         if (choice == 1){
-            ConsoleLayer.display();
+            try {
+                ConsoleLayer.display();
+            }
+            catch(IOException e){}
         }
         else {
             launch(args);

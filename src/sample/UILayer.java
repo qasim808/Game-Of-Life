@@ -3,6 +3,8 @@ package sample;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 
+import java.io.IOException;
+
 public class UILayer implements Grid {
     private int windowWidth;
     private int windowHeight;
@@ -101,7 +103,7 @@ public class UILayer implements Grid {
     public TilePane getMenu(){
         return new TilePane();
     }
-    public void display(){
+    public void display() throws IOException {
 
     }
 }
