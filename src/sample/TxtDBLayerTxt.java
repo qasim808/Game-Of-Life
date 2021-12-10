@@ -15,7 +15,7 @@ public class TxtDBLayerTxt implements IDBLayerTxt {
         this.filePath = path;
     }
     @Override
-    public char[][] readFromTxtDB(int rows, int cols) {
+    public String readFromTxtDB() {
         String data = "";
         try {
             File myObj = new File("C:\\Users\\qasim\\IdeaProjects\\HelloJFX\\src\\sample\\db.txt");
@@ -28,19 +28,18 @@ public class TxtDBLayerTxt implements IDBLayerTxt {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return parseStringBackTo2d(data, rows, cols);
+        return data;
     }
 
 
     @Override
-    public void saveToTxtDB(char[][] grid) {
+    public void saveToTxtDB(String grid) {
         File myFile = new File("C:\\Users\\qasim\\IdeaProjects\\HelloJFX\\src\\sample\\db.txt");
-        String parsed = parse2dArrayToString(grid);
         if (myFile.canExecute()){
             if (myFile.canWrite()){
                 try {
                     FileWriter writer = new FileWriter("C:\\Users\\qasim\\IdeaProjects\\HelloJFX\\src\\sample\\db.txt");
-                    writer.write(parsed);
+                    writer.write(grid);
                     writer.close();
                 } catch (IOException e) {
                     System.out.println("UNABLE TO WRITE TO FILE.");
@@ -68,7 +67,7 @@ public class TxtDBLayerTxt implements IDBLayerTxt {
     }
 
     @Override
-    public char[][] loadSpecificGridFromTxtDb(int savedStateNo, int rows, int cols) {
+    public String loadSpecificGridFromTxtDb(int savedStateNo) {
         int count = getNumberOfSavedStates();
         String data = "";
         if (savedStateNo <= count){
@@ -85,35 +84,12 @@ public class TxtDBLayerTxt implements IDBLayerTxt {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            return parseStringBackTo2d(data, rows, cols);
+            return data;
         }
-        return new char[0][];
+        return "";
     }
 
-    private String parse2dArrayToString(char[][]grid){
-        StringBuilder parsed = new StringBuilder();
-        for (int i=0; i<grid.length; i++){
-            for (int f=0; f<grid.length; f++){
-                parsed.append(grid[i][f]);
-            }
-            parsed.append('|');
-        }
-        parsed.append('\n');
-        return parsed.toString();
-    }
 
-    private char[][] parseStringBackTo2d(String str, int rows, int cols){
-        int row = 0, col = 0;
-        char [][] arr = new char[rows][cols];
-        for (int i=0; i< str.length(); i++){
-            if (str.charAt(i) == '|') {
-                row++;
-                col = 0;
-            }
-            else {
-                arr[row][col++] = str.charAt(i);
-            }
-        }
-        return arr;
-    }
+
+
 }

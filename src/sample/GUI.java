@@ -149,7 +149,7 @@ public class GUI extends UILayer {
         btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                //reset to default empty
+                SQLDBLayer layer = new SQLDBLayer();
                 isFirstClick = false;
                 initiliazeCharGrid();
                 getGridPane();

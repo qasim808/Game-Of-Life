@@ -14,19 +14,19 @@ public class Controller implements IController {
     @Override
     public char[][] get2dArr(int savedState, int rows, int cols) {
         TxtDBFactory txt = new TxtDBFactory();
-        return txt.loadSpecificGridFromTxtDb(savedState, rows, cols);
+        return parseStringBackTo2d(txt.loadSpecificGridFromTxtDb(savedState), rows, cols);
     }
 
     @Override
     public char[][] get2dArr(int rows, int cols) {
         TxtDBFactory txt = new TxtDBFactory();
-        return txt.readFromTxtDB(rows, cols);
+        return parseStringBackTo2d(txt.readFromTxtDB(), rows, cols);
     }
 
     @Override
     public void saveToTxt(char[][] grid) {
         TxtDBFactory txt = new TxtDBFactory();
-        txt.saveToTxtDB(grid);
+        txt.saveToTxtDB(parse2dArrayToString(grid));
     }
 
     @Override
@@ -102,5 +102,30 @@ public class Controller implements IController {
                 grid2[i][f] = grid1[i][f];
             }
         }
+    }
+    private char[][] parseStringBackTo2d(String str, int rows, int cols){
+        int row = 0, col = 0;
+        char [][] arr = new char[rows][cols];
+        for (int i=0; i< str.length(); i++){
+            if (str.charAt(i) == '|') {
+                row++;
+                col = 0;
+            }
+            else {
+                arr[row][col++] = str.charAt(i);
+            }
+        }
+        return arr;
+    }
+    private String parse2dArrayToString(char[][]grid){
+        StringBuilder parsed = new StringBuilder();
+        for (int i=0; i<grid.length; i++){
+            for (int f=0; f<grid.length; f++){
+                parsed.append(grid[i][f]);
+            }
+            parsed.append('|');
+        }
+        parsed.append('\n');
+        return parsed.toString();
     }
 }

@@ -7,12 +7,12 @@ public class TxtDBFactory implements IDBLayerTxt{
     }
 
     @Override
-    public char[][] readFromTxtDB(int rows, int cols) {
-        return txtDbj.readFromTxtDB(rows, cols);
+    public String readFromTxtDB() {
+        return txtDbj.readFromTxtDB();
     }
 
     @Override
-    public void saveToTxtDB(char[][] grid) {
+    public void saveToTxtDB(String grid) {
         txtDbj.saveToTxtDB(grid);
     }
 
@@ -22,7 +22,7 @@ public class TxtDBFactory implements IDBLayerTxt{
     }
 
     @Override
-    public char[][] loadSpecificGridFromTxtDb(int savedStateNo, int rows, int cols) {
-        return txtDbj.loadSpecificGridFromTxtDb(savedStateNo, rows, cols);
+    public String loadSpecificGridFromTxtDb(int savedStateNo) {
+        return txtDbj.loadSpecificGridFromTxtDb(savedStateNo);
     }
 }
