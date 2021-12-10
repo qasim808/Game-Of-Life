@@ -1,11 +1,9 @@
 package sample;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class CUI extends UILayer implements KeyListener {
+public class CUI extends UILayer{
     public CUI(int windowWidth, int windowHeight, int size){
         super(windowWidth, windowHeight, size);
     }
@@ -61,23 +59,6 @@ public class CUI extends UILayer implements KeyListener {
 
             System.out.println("Press Any Key To Continue To Next Iteration....");
             int hitKey = System.in.read();
-            System.out.println(hitKey);
-
         }
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        System.out.println("Pressed");
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
     }
 }
