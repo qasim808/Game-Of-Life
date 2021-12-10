@@ -1,6 +1,12 @@
 package sample;
 
-import java.io.IOException;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
+
 import java.util.Scanner;
 
 public class CUI extends UILayer{
@@ -19,7 +25,7 @@ public class CUI extends UILayer{
     }
 
     @Override
-    public void display() throws IOException {
+    public void display(){
         int xInput, yInput;
         boolean gameActive = true;
         Scanner inScanner = new Scanner(System.in);
@@ -49,16 +55,50 @@ public class CUI extends UILayer{
                 yInput = inScanner.nextInt();
             }
 
-            if (super.getCharGrid()[xInput][yInput] == ' '){
+            if (super.getCharGrid()[xInput][yInput] == ' ')
                 setCoordinates(xInput, yInput);
-            }
             else
-            {
                 unsetCoordinates(xInput, yInput);
+            drawGrid();
+            System.out.println("ENTER 'S' TO START LOOP\n 'N' FOR NEXT MOVE\n 'D' TO SAVE IN TXT DB'\n F TO LOAD FROM TXTDB");
+            System.out.println("ENTER G to SAVE IN SQL\nENTER H to GET FROM SQL");
+            System.out.println("ENTER C to continue marking");
+            String input = "";
+            input = inScanner.next();
+            if (input.equals("S")){
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent ev) {
+                        CParser cp = new CParser();
+                        setCharGrid(cp.BtnClick_handleNext(getCharGrid()));
+                        drawGrid();
+                    }
+                }));
+                timeline.setCycleCount(Animation.INDEFINITE);
+                timeline.play();
+            }
+            else if (input.equals("N")){
+                CParser cp = new CParser();
+                setCharGrid(cp.BtnClick_handleNext(getCharGrid()));
+                drawGrid();
+            }
+            else if (input.equals("D")){
+                CParser cp = new CParser();
+                cp.saveToTxt(getCharGrid());
+            }
+            else if (input.equals("F")){
+                CParser cp = new CParser();
+                setCharGrid(cp.get2dArr(this.getWindowWidth()/getSize(), this.getWindowHeight()/getSize()));
+            }
+            else if (input.equals("G")){
+                CParser cp = new CParser();
+                cp.saveToSql(getCharGrid());
+            }
+            else if (input.equals("H")){
+                CParser cp = new CParser();
+                setCharGrid(cp.get2dArrFromSql(this.getWindowWidth()/getSize(), this.getWindowHeight()/getSize()));
             }
 
-            System.out.println("Press Any Key To Continue To Next Iteration....");
-            int hitKey = System.in.read();
         }
     }
 }

@@ -132,8 +132,9 @@ public class Main extends Application {
         int choice;
         choice = inScanner.nextInt();
 
-        if (choice == -99)
-            return;
+        if (choice == -99){
+            System.exit(0);
+        }
 
         while (choice < 1 || choice > 2){
             System.out.println("Wrong Choice Entered. Please Enter Again: ");
@@ -141,10 +142,7 @@ public class Main extends Application {
         }
 
         if (choice == 1){
-            try {
-                ConsoleLayer.display();
-            }
-            catch(IOException e){}
+            ConsoleLayer.display();
         }
         else {
             launch(args);
