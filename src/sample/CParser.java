@@ -40,4 +40,14 @@ public class CParser implements IController{
         IController ic = new Controller();
         ic.saveToTxt(grid);
     }
+
+    @Override
+    public void saveToSql(char[][] grid) {
+
+    }
+
+    @Override
+    public char[][] get2dArrFromSql(int rows, int cols) {
+        return new char[0][];
+    }
 }
