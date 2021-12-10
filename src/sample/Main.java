@@ -11,9 +11,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 class gameWindow{
     public gameWindow(){
@@ -97,8 +97,6 @@ class loadOptionsScene{
     }
 }
 public class Main extends Application {
-
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -123,7 +121,30 @@ public class Main extends Application {
             CUI.display();*/
     }
     public static void main(String[] args) {
-        launch(args);
+        Scanner inScanner = new Scanner(System.in);
+        System.out.println("=== Welcome to John Conway's Game ===");
+        System.out.println("Enter 1 to start Console Game.");
+        System.out.println("Enter 2 to start Java FX Game.");
+        System.out.println("Enter -99 to Quit.");
+
+        System.out.print("* Choice: ");
+        int choice;
+        choice = inScanner.nextInt();
+
+        if (choice == -99)
+            return;
+
+        while (choice < 1 || choice > 2){
+            System.out.println("Wrong Choice Entered. Please Enter Again: ");
+            choice = inScanner.nextInt();
+        }
+
+        if (choice == 1){
+            System.out.println("Hello");
+        }
+        else {
+            launch(args);
+        }
     }
     public TilePane getParentButtons(final Stage primaryStage, final VBox box){
         TilePane tPane = new TilePane();
