@@ -30,6 +30,16 @@ public class Controller implements IController {
     }
 
     @Override
+    public void saveToSql(char[][] grid) {
+        SQLDBFactory dbFac= new SQLDBFactory();
+    }
+
+    @Override
+    public char[][] get2dArrFromSql(int rows, int cols) {
+        return new char[0][];
+    }
+
+    @Override
     public char [][] BtnClick_handleStart(char [][] grid){
             //handle once the start button is clicked it should
         Controller con = new Controller();

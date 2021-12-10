@@ -149,7 +149,7 @@ public class GUI extends UILayer {
         btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                SQLDBLayer layer = new SQLDBLayer();
+                //SQLDBLayer layer = new SQLDBLayer();
                 isFirstClick = false;
                 initiliazeCharGrid();
                 getGridPane();
@@ -188,6 +188,18 @@ public class GUI extends UILayer {
                 CParser cp = new CParser();
                 setCharGrid(cp.get2dArr(getWindowWidth()/getSize(), getWindowHeight()/getSize()));
                 getGridPane();
+            }
+        });
+        pane.getChildren().add(btn);
+        btn = new Button("Save DB SQL");
+        btn.setStyle("-fx-background-color: #1b2670;");
+        btn.setTextFill(Paint.valueOf("white"));
+        btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                SQLDBLayer layer = new SQLDBLayer();
+                layer.saveGrid("HELLOWORLD");
+
             }
         });
         pane.getChildren().add(btn);
