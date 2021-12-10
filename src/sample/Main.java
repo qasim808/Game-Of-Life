@@ -121,6 +121,7 @@ public class Main extends Application {
             CUI.display();*/
     }
     public static void main(String[] args) {
+        CUI ConsoleLayer = new CUI(500, 300, 15);
         Scanner inScanner = new Scanner(System.in);
         System.out.println("=== Welcome to John Conway's Game ===");
         System.out.println("Enter 1 to start Console Game.");
@@ -140,7 +141,7 @@ public class Main extends Application {
         }
 
         if (choice == 1){
-            System.out.println("Hello");
+            ConsoleLayer.display();
         }
         else {
             launch(args);

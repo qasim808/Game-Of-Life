@@ -1,15 +1,7 @@
 package sample;
 
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import java.lang.Math;
 
 public class UILayer implements Grid {
     private int windowWidth;
@@ -57,6 +49,7 @@ public class UILayer implements Grid {
     public void setWindowHeight(int windowHeight) {
         this.windowHeight = windowHeight;
     }
+
     @Override
     public void setCoordinates(double x, double y) {
         this.charGrid[(int)y][(int)x] = 'S';
