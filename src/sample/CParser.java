@@ -1,7 +1,6 @@
 package sample;
 
 public class CParser implements IController{
-
     public CParser(){
 
     }
