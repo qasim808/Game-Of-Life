@@ -11,7 +11,7 @@ public class CUI extends UILayer{
         char [][] grid = super.getCharGrid();
         for (int i = 0; i < getWindowHeight() / getSize(); i++){
             for (int j = 0; j < getWindowWidth() / getSize(); j++){
-                System.out.print("*");
+                System.out.print(super.getCharGrid()[i][j]);
             }
             System.out.println();
         }
@@ -30,7 +30,7 @@ public class CUI extends UILayer{
         while (gameActive){
             drawGrid();
 
-            System.out.print("x: ");
+            System.out.print("X: ");
             xInput = inScanner.nextInt();
             System.out.print("Y: ");
             yInput = inScanner.nextInt();
@@ -47,6 +47,11 @@ public class CUI extends UILayer{
                 System.out.print("Y: ");
                 yInput = inScanner.nextInt();
             }
+
+            if (super.getCharGrid()[xInput][yInput] == ' ')
+                setCoordinates(xInput, yInput);
+            else
+                unsetCoordinates(xInput, yInput);
         }
     }
 }
