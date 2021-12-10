@@ -11,6 +11,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 class gameWindow{
     public gameWindow(){
 
@@ -20,6 +24,76 @@ class gameWindow{
         VBox root = new VBox();
         root.getChildren().addAll(UIWindow.getGridPane(), UIWindow.getMenu());
         return new Scene(root, 560, 700);
+    }
+}
+class ParentWindow {
+    private Stage primaryStage;
+    private Scene nextScene;
+
+    public ParentWindow(Stage primaryStage, Scene transition){
+        this.primaryStage = primaryStage;
+        this.nextScene = transition;
+    }
+    public TilePane getParentButtons(){
+        TilePane tPane = new TilePane();
+        Button btn = new Button("Start New Game");
+        btn.setPrefSize(200, 100);
+        tPane.setAlignment(Pos.BASELINE_CENTER);
+        btn.setStyle("-fx-background-color: #1b2670;");
+        btn.setTextFill(Paint.valueOf("white"));
+        final Button finalBtn = btn;
+        btn.setOnMouseClicked((new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                primaryStage.setScene(nextScene);
+            }
+        }));
+        btn = finalBtn;
+        tPane.getChildren().add(btn);
+        return tPane;
+    }
+}
+class loadOptionsScene{
+    private Stage primaryStage;
+    private Scene nextScene;
+    public loadOptionsScene(){
+    }
+    public loadOptionsScene(Stage primaryStage, Scene transition){
+        this.primaryStage = primaryStage;
+        this.nextScene = transition;
+    }
+    public Scene createButtons(final Stage primaryStage){
+        VBox box = new VBox();
+        CParser parser = new CParser();
+        TilePane tPane = new TilePane();
+        for (int i=0; i<parser.getNumberOfSavedStatesInTxtDB(); i++){
+            Button btn = new Button("Load State " + i+1);
+            btn.setPrefSize(200, 100);
+            tPane.setAlignment(Pos.BASELINE_CENTER);
+            btn.setStyle("-fx-background-color: #1b2670;");
+            btn.setTextFill(Paint.valueOf("white"));
+            final Button finalBtn = btn;
+            final Button finalBtn1 = btn;
+            btn.setOnMouseClicked((new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent event) {
+                    try {
+                        String infOStoStore = "";
+                        infOStoStore += finalBtn1.getText().replaceFirst("Load State ", "");
+                        infOStoStore += '\n';
+                        FileWriter writer = new FileWriter("C:\\Users\\qasim\\IdeaProjects\\HelloJFX\\src\\sample\\config.txt");
+                        writer.write(infOStoStore);
+                        writer.close();
+                    } catch (IOException e) {
+                        System.out.println("UNABLE TO WRITE TO FILE.");
+                        e.printStackTrace();
+                    }
+                    primaryStage.setScene(new gameWindow().createAndGetGameScene());
+                }
+            }));
+            btn = finalBtn;
+            tPane.getChildren().add(btn);
+        }
+        box.getChildren().add(tPane);
+        return new Scene(box, 560, 700);
     }
 }
 public class Main extends Application {
@@ -39,6 +113,7 @@ public class Main extends Application {
 
             gameWindow gw = new gameWindow();
             primaryStage.setResizable(false);
+            //loadOptionsScene loadOptionsScene = new loadOptionsScene(primaryStage, gw.createAndGetGameScene());
             ParentWindow newWindow = new ParentWindow(primaryStage, gw.createAndGetGameScene());
             VBox parentScene = new VBox();
             parentScene.getChildren().add(newWindow.getParentButtons());

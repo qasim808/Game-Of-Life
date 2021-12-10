@@ -14,6 +14,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class GUI extends UILayer {
     private boolean isFirstClick;
     private GridPane gPane;
@@ -41,6 +47,21 @@ public class GUI extends UILayer {
         gPane.setPrefSize(this.getWindowWidth()/this.getSize(), this.getWindowHeight()/this.getSize());
         gPane.setVgap(1);
         gPane.setHgap(1);
+        /*String data = "";
+        try {
+            File myObj = new File("C:\\Users\\qasim\\IdeaProjects\\HelloJFX\\src\\sample\\config.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()){
+                data = myReader.nextLine();
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (!data.equals("")){
+            CParser parser = new CParser();
+            setCharGrid(parser.get2dArr(Integer.parseInt(data), getWindowWidth(), getWindowHeight()));
+        }*/
         for (int i=0; i<(this.getWindowWidth()/this.getSize()); i++) {
             for (int f=0; f<(this.getWindowHeight()/this.getSize()); f++) {
                 final Rectangle rect;
@@ -147,17 +168,28 @@ public class GUI extends UILayer {
             }
         });
         pane.getChildren().add(btn);
-        btn = new Button("Save State");
+        btn = new Button("Save State Txt");
         btn.setStyle("-fx-background-color: #1b2670;");
         btn.setTextFill(Paint.valueOf("white"));
         btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                //reset to default empty
+                CParser cp = new CParser();
+                cp.saveToTxt(getCharGrid());
             }
         });
-
-
+        pane.getChildren().add(btn);
+        btn = new Button("Load State Txt");
+        btn.setStyle("-fx-background-color: #1b2670;");
+        btn.setTextFill(Paint.valueOf("white"));
+        btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                CParser cp = new CParser();
+                setCharGrid(cp.get2dArr(getWindowWidth()/getSize(), getWindowHeight()/getSize()));
+                getGridPane();
+            }
+        });
         pane.getChildren().add(btn);
         return pane;
     }

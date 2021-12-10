@@ -6,6 +6,30 @@ public class Controller implements IController {
 
     }
     @Override
+    public int getNumberOfSavedStatesInTxtDB(){
+        TxtDBFactory txt = new TxtDBFactory();
+        return txt.getNumberOfSavedStates();
+    }
+
+    @Override
+    public char[][] get2dArr(int savedState, int rows, int cols) {
+        TxtDBFactory txt = new TxtDBFactory();
+        return txt.loadSpecificGridFromTxtDb(savedState, rows, cols);
+    }
+
+    @Override
+    public char[][] get2dArr(int rows, int cols) {
+        TxtDBFactory txt = new TxtDBFactory();
+        return txt.readFromTxtDB(rows, cols);
+    }
+
+    @Override
+    public void saveToTxt(char[][] grid) {
+        TxtDBFactory txt = new TxtDBFactory();
+        txt.saveToTxtDB(grid);
+    }
+
+    @Override
     public char [][] BtnClick_handleStart(char [][] grid){
             //handle once the start button is clicked it should
         Controller con = new Controller();

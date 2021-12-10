@@ -31,20 +31,6 @@ public class TxtDBLayerTxt implements IDBLayerTxt {
         return parseStringBackTo2d(data, rows, cols);
     }
 
-    private char[][] parseStringBackTo2d(String str, int rows, int cols){
-        int row = 0, col = 0;
-        char [][] arr = new char[rows][cols];
-        for (int i=0; i< str.length(); i++){
-            if (str.charAt(i) == '|') {
-                row++;
-                col = 0;
-            }
-            else {
-                arr[row][col++] = str.charAt(i);
-            }
-        }
-        return arr;
-    }
 
     @Override
     public void saveToTxtDB(char[][] grid) {
@@ -63,6 +49,47 @@ public class TxtDBLayerTxt implements IDBLayerTxt {
             }
         }
     }
+
+    @Override
+    public int getNumberOfSavedStates() {
+        int count = 0;
+        try {
+            File myObj = new File("C:\\Users\\qasim\\IdeaProjects\\HelloJFX\\src\\sample\\db.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()){
+                myReader.nextLine();
+                count += 1;
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    @Override
+    public char[][] loadSpecificGridFromTxtDb(int savedStateNo, int rows, int cols) {
+        int count = getNumberOfSavedStates();
+        String data = "";
+        if (savedStateNo <= count){
+            try {
+                File myObj = new File("C:\\Users\\qasim\\IdeaProjects\\HelloJFX\\src\\sample\\db.txt");
+                Scanner myReader = new Scanner(myObj);
+                while (myReader.hasNextLine()){
+                    count += 1;
+                    if (count - savedStateNo == 0){
+                        data = myReader.nextLine();
+                    }
+                }
+                myReader.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            return parseStringBackTo2d(data, rows, cols);
+        }
+        return new char[0][];
+    }
+
     private String parse2dArrayToString(char[][]grid){
         StringBuilder parsed = new StringBuilder();
         for (int i=0; i<grid.length; i++){
@@ -73,5 +100,20 @@ public class TxtDBLayerTxt implements IDBLayerTxt {
         }
         parsed.append('\n');
         return parsed.toString();
+    }
+
+    private char[][] parseStringBackTo2d(String str, int rows, int cols){
+        int row = 0, col = 0;
+        char [][] arr = new char[rows][cols];
+        for (int i=0; i< str.length(); i++){
+            if (str.charAt(i) == '|') {
+                row++;
+                col = 0;
+            }
+            else {
+                arr[row][col++] = str.charAt(i);
+            }
+        }
+        return arr;
     }
 }
