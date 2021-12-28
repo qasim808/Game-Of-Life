@@ -1,15 +1,17 @@
-package sample;
+package sample.UI;
 
+import sample.BL.CParser;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
+import sample.UI.UILayer;
 
 import java.util.Scanner;
 
-public class CUI extends UILayer{
+public class CUI extends UILayer {
     public CUI(int windowWidth, int windowHeight, int size){
         super(windowWidth, windowHeight, size);
     }

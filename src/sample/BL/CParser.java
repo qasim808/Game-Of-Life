@@ -1,6 +1,7 @@
-package sample;
+package sample.BL;
 
-public class CParser implements IController{
+//bl
+public class CParser implements IController {
     public CParser(){
 
     }

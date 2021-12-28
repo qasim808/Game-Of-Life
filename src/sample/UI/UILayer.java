@@ -1,4 +1,4 @@
-package sample;
+package sample.UI;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;

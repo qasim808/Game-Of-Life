@@ -1,6 +1,6 @@
-package sample;
+package sample.TxtDB;
 
-public class TxtDBFactory implements IDBLayerTxt{
+public class TxtDBFactory implements IDBLayerTxt {
     private TxtDBLayerTxt txtDbj;
     public TxtDBFactory(){
         txtDbj = new TxtDBLayerTxt();

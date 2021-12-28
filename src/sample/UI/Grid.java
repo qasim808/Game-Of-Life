@@ -1,4 +1,4 @@
-package sample;
+package sample.UI;
 
 public interface Grid {
     public void setCoordinates(double x, double y);

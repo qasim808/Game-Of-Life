@@ -1,5 +1,6 @@
 package sample;
 
+import sample.BL.CParser;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -10,6 +11,9 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import sample.UI.CUI;
+import sample.UI.GUI;
+import sample.UI.UILayer;
 
 import java.io.FileWriter;
 import java.io.IOException;

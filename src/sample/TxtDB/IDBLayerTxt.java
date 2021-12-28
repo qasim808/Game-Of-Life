@@ -1,4 +1,4 @@
-package sample;
+package sample.TxtDB;
 
 public interface IDBLayerTxt {
     String readFromTxtDB();

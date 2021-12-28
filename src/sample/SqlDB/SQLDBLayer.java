@@ -1,8 +1,8 @@
-package sample;
+package sample.SqlDB;
 
 import java.sql.*;
 
-public class SQLDBLayer implements IDBSQL{
+public class SQLDBLayer implements IDBSQL {
     private String dbURL;
     private Connection conn;
 

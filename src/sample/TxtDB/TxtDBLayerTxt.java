@@ -1,4 +1,4 @@
-package sample;
+package sample.TxtDB;
 
 import java.io.File;
 import java.io.FileNotFoundException;

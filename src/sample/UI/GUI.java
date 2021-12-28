@@ -1,5 +1,6 @@
-package sample;
-
+package sample.UI;
+//gui
+import sample.BL.CParser;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,12 +14,8 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
+import sample.SqlDB.SQLDBLayer;
+import sample.UI.UILayer;
 
 public class GUI extends UILayer {
     private boolean isFirstClick;

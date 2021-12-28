@@ -1,6 +1,6 @@
-package sample;
+package sample.SqlDB;
 
-public class SQLDBFactory implements IDBSQL{
+public class SQLDBFactory implements IDBSQL {
     @Override
     public void saveGrid(String grid) {
         IDBSQL Isql = new SQLDBLayer();

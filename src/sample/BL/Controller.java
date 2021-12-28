@@ -1,5 +1,7 @@
-package sample;
-
+package sample.BL;
+//bl
+import sample.SqlDB.SQLDBFactory;
+import sample.TxtDB.TxtDBFactory;
 
 public class Controller implements IController {
     public Controller(){
